@@ -1,22 +1,3 @@
-# import requests
-#
-# def send_to_llama3(diff):
-#     """
-#     Llama 3 서버에 코드 diff를 전달하여 리뷰 결과를 반환합니다.
-#     """
-#     url = "http://localhost:8680/review"    # Llama 3 서버 URL
-#     data = {"code_diff": diff}  # diff를 JSON으로 전달
-#
-#     try:
-#         response = requests.post(url, json=data)
-#         if response.status_code == 200:
-#             return response.json().get("review", "No review generated.")
-#         else:
-#             print(f"Error from Llama 3 server: {response.status_code} - {response.text}")
-#             return "Error generating review."
-#     except Exception as e:
-#         print(f"Exception while connecting to Llama 3 server: {e}")
-#         return "Error connecting to Llama 3 server."
 import requests
 import os
 
@@ -28,7 +9,8 @@ def send_to_llama3(diff):
     if not api_key:
         raise ValueError("Hugging Face API key가 설정되어 있지 않습니다.")
 
-    url = "https://api-inference.huggingface.co/models/EleutherAI/gpt-neo-2.7B"
+    # url = "https://api-inference.huggingface.co/models/EleutherAI/gpt-neo-2.7B"
+    url = "http://localhost:8680/review"
     headers = {"Authorization": f"Bearer {api_key}"}
     payload = {"inputs": diff}
 

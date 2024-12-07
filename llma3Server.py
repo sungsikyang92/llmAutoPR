@@ -26,6 +26,11 @@ def home():
 @app.route("/review", methods = ["POST"])
 def review():
     data = request.json
+
+    # 디버깅 로그 추가
+    print(f"Received request at /review: {data}")
+
+
     code_diff = data.get("code_diff", "")
     code_context = data.get("code_context", "")
 
@@ -47,17 +52,6 @@ def review():
         "After generating the review, please translate the entire result into Korean for better understanding.\n\n"
         f"Here is the code diff for review:\n\n{code_diff}"
     )
-
-    # messages = [{"role": "user", "content": prompt}]
-    #
-    # completion = client.chat.completions.create(
-    #     model="meta-llama/Llama-3.3-70B-Instruct",
-    #     messages=messages,
-    #     max_tokens=1000  # 한글 번역을 포함하므로 max_tokens를 늘림
-    # )
-    #
-    # review_comment = completion.choices[0].message["content"]
-    # return jsonify({"review": review_comment})
 
     # Hugging Face Inference API 호출
     try:
